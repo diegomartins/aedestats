@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="../css/main.css">
+    </head>
+    <body data-ng-app="AedestatsApp" data-ng-cloak>
+        
+        <div id="main" data-ng-controller="AedestatsDetailController as vm">
+            
+            <label for="nbh" class="lbl">{{messages["NEIGHBORHOOD"]}}</label>
+            <select name="nbh" data-ng-model="vm.selectedNeighborhood" data-ng-change="vm.getStats()"
+                data-ng-options="neighborhood as neighborhood.name for neighborhood in vm.neighborhoods">
+                <option value="">{{messages["SELECT_ONE"]}}</option>
+            </select>
+            
+            <ul id="nbhData" data-ng-show="vm.selectedNeighborhood">
+            
+                <li>
+                    <span class="lbl">{{messages["ZONE"]}}</span>
+                    <span class="val">{{vm.selectedStats.zone.name}}</span>
+                </li>
+               
+                <li>
+                    <span class="lbl">{{messages["REGION"]}}</span>
+                    <span class="val">{{vm.selectedStats.region.name}}</span>
+                </li>
+                
+                <li>
+                    <span class="lbl">{{messages["POPULATION"]}}</span>
+                    <span class="val">{{vm.selectedStats.population}}</span>
+                </li>
+                
+                <li>
+                    <span class="lbl">{{messages["DNG"]}}</span>
+                    <span class="val">(dng)</span>
+                    <ul class="diseaseDetail">
+                        <li>
+                            <span class="lbl">{{messages["CASES"]}}</span>
+                            <span class="val">{{vm.selectedStats.dng.total}}</span>
+                        </li>
+                        <li>
+                            <span class="lbl">{{messages["INF_RATE"]}}</span>
+                            <span class="val">{{vm.selectedStats.dng.infRate}}</span>
+                        </li>
+                    </ul>
+                </li>
+                
+                <li>
+                    <span class="lbl">{{messages["ZIK"]}}</span>
+                    <span class="val">(zik)</span>
+                    <ul class="diseaseDetail">
+                        <li>
+                            <span class="lbl">{{messages["CASES"]}}</span>
+                            <span class="val">{{vm.selectedStats.zik.total}}</span>
+                        </li>
+                        <li>
+                            <span class="lbl">{{messages["INF_RATE"]}}</span>
+                            <span class="val">{{vm.selectedStats.zik.infRate}}</span>
+                        </li>
+                    </ul>
+                </li>
+                
+                <li>
+                    <span class="lbl">{{messages["CHK"]}}</span>
+                    <span class="val">(chk)</span>
+                    <ul class="diseaseDetail">
+                        <li>
+                            <span class="lbl">{{messages["CASES"]}}</span>
+                            <span class="val">{{vm.selectedStats.chk.total}}</span>
+                        </li>
+                        <li>
+                            <span class="lbl">{{messages["INF_RATE"]}}</span>
+                            <span class="val">{{vm.selectedStats.chk.infRate}}</span>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        
+        <script type="text/javascript" src="../node_modules/angular/angular.js"></script>
+        <script type="text/javascript" src="../node_modules/angular-mocks/angular-mocks.js"></script>
+        
+        <script type="text/javascript" src="../js/angular/locale/locale_pt-br.js"></script>
+        <script type="text/javascript" src="../js/angular/locale/locale_en-us.js"></script>
+        
+        <script type="text/javascript" src="../js/angular/modules/LocaleApp.js"></script>
+        <script type="text/javascript" src="../js/angular/modules/ServicesApp.js"></script>
+        <script type="text/javascript" src="../js/angular/modules/AedestatsApp.js"></script>
+        
+        <script type="text/javascript" src="../js/angular/httpBackendStub.js"></script>
+        
+        <script type="text/javascript" src="../js/angular/providers/LocaleProvider.js"></script>
+        <script type="text/javascript" src="../js/angular/services/AedestatsService.js"></script>
+        
+        <script type="text/javascript" src="../js/angular/controllers/AedestatsApp/AedestatsDetailController.js"></script>
+    </body>
+</html>
