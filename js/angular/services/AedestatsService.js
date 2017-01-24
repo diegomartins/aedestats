@@ -8,8 +8,9 @@
     function AedestatsService($http) {
         
         var module = {
-            getAreas : getAreas,
-            getStats : getStats
+            getAreas       : getAreas,
+            getStats       : getStats,
+            getGlobalStats : getGlobalStats
         };
         
         var appRoot = "/rest"
@@ -22,6 +23,11 @@
         function getStats(area) {
             
             return $http.post(appRoot + "/stats", area);
+        }
+        
+        function getGlobalStats(area) {
+            
+            return $http.get(appRoot + "/globalstats");
         }
         
         return module;

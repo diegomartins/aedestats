@@ -10,7 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "angular": "1.6.1",
-    "angular-mocks" : "1.6.1"
+    "angular-mocks" : "1.6.1",
+    "chart.js" : "2.4.0"
   },
   "devDependencies": {
     "jasmine-core": "^2.3.4",

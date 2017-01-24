@@ -13,6 +13,8 @@ AedestatsLocales.locale_enus = (function() {
         ZIK: "ZIK",
         CASES: "Cases",
         INF_RATE: "Infection rate",
+        WEEKS : "Weeks",
+        VIRUS : "Virus",
         
         SELECT_ONE: "Select one option",
         

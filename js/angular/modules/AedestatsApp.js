@@ -1,7 +1,8 @@
 (function(angular) {
     
     var moduleDependencies = ["LocaleApp", 
-                              "ServicesApp"];
+                              "ServicesApp",
+                              "TaglibApp"];
     
     var app = angular.module("AedestatsApp", moduleDependencies);
   

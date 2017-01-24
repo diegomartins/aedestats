@@ -7,7 +7,51 @@
     </head>
     <body data-ng-app="AedestatsApp" data-ng-cloak>
         
-        <div id="main" data-ng-controller="AedestatsDetailController as vm">
+        <div id="global" data-ng-controller="AedestatsGlobalStatsController as agsCtrl">
+            
+            <div class="data">
+                <span class="lbl">{{messages["POPULATION"]}}</span>
+                <span class="val">{{agsCtrl.stats.population}}</span>
+                
+                <span class="lbl">{{messages["CASES"]}}</span>
+                <span class="val">{{agsCtrl.stats.totalCases}}</span>
+            </div>                    
+            
+            <table class="weekStats">
+                
+                <thead>
+                     <tr>
+                        <th>{{messages["VIRUS"]}}</th>
+                        <th colspan="54">{{messages["WEEKS"]}}</th>
+                    </tr>    
+                    <tr>
+                        <th></th>
+                        <th class="tableNumber" data-ng-repeat="weekStat in agsCtrl.stats.dng.casesPerWeek track by $index">{{$index + 1}}</th>  
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    <tr>
+                        <td>{{messages["DNG"]}}</td>
+                        <td class="tableNumber" data-ng-repeat="weekStat in agsCtrl.stats.dng.casesPerWeek track by $index">{{weekStat}}</td>
+                    </tr>
+                    <tr>
+                        <td>{{messages["CHK"]}}</td>
+                        <td class="tableNumber" data-ng-repeat="weekStat in agsCtrl.stats.chk.casesPerWeek track by $index">{{weekStat}}</td>
+                    </tr>
+                    <tr>
+                        <td>{{messages["ZIK"]}}</td>
+                        <td class="tableNumber" data-ng-repeat="weekStat in agsCtrl.stats.zik.casesPerWeek track by $index">{{weekStat}}</td>
+                    </tr>
+                </tbody>
+                
+            </table>
+            
+            <line-chart id="weekChart" chart-data="agsCtrl.chartData" width="1000" height="200"></line-chart>
+            
+        </div>
+        
+        <div id="details" data-ng-controller="AedestatsDetailController as vm">
             
             <label for="nbh" class="lbl">{{messages["NEIGHBORHOOD"]}}</label>
             <select name="nbh" data-ng-model="vm.selectedNeighborhood" data-ng-change="vm.getStats()"
@@ -79,6 +123,8 @@
             </ul>
         </div>
         
+        <script type="text/javascript" src="../node_modules/chart.js/dist/Chart.js"></script>
+                
         <script type="text/javascript" src="../node_modules/angular/angular.js"></script>
         <script type="text/javascript" src="../node_modules/angular-mocks/angular-mocks.js"></script>
         
@@ -86,6 +132,7 @@
         <script type="text/javascript" src="../js/angular/locale/locale_en-us.js"></script>
         
         <script type="text/javascript" src="../js/angular/modules/LocaleApp.js"></script>
+        <script type="text/javascript" src="../js/angular/modules/TaglibApp.js"></script>
         <script type="text/javascript" src="../js/angular/modules/ServicesApp.js"></script>
         <script type="text/javascript" src="../js/angular/modules/AedestatsApp.js"></script>
         
@@ -94,6 +141,8 @@
         <script type="text/javascript" src="../js/angular/providers/LocaleProvider.js"></script>
         <script type="text/javascript" src="../js/angular/services/AedestatsService.js"></script>
         
+        <script type="text/javascript" src="../js/angular/directives/LineChart.js"></script>
+        <script type="text/javascript" src="../js/angular/controllers/AedestatsApp/AedestatsGlobalStatsController.js"></script>
         <script type="text/javascript" src="../js/angular/controllers/AedestatsApp/AedestatsDetailController.js"></script>
     </body>
 </html>

@@ -13,7 +13,8 @@ AedestatsLocales.locale_ptbr = (function() {
         ZIK: "ZIK",
         CASES: "Casos",
         INF_RATE: "Taxa de infecção",
-        
+        WEEKS : "Semanas",
+        VIRUS : "Vírus",
         SELECT_ONE: "Selecione uma opção",
         
         getLocale: getLocale
