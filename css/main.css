@@ -6,6 +6,24 @@ ul {
     list-style: none;
 }
 
+.weekStats {
+    border-collapse: collapse;
+}
+
+.weekStats .tableNumber {
+    font-size: 12px;
+}
+
+.weekStats th, .weekStats td {
+    border: 1px solid black;
+}
+
+.weekStats td {
+    text-align: center;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
 /*
                   AngularJS
 */
