@@ -1,11 +1,11 @@
 (function(angular, Chart) {
     
     angular.module("TaglibApp")
-        .directive("lineChart", LineChart);
+        .directive("pieChart", PieChart);
     
-    LineChart.$inject = [];
+    PieChart.$inject = [];
     
-    function LineChart() {
+    function PieChart() {
         
         var directive = {
             
@@ -29,7 +29,7 @@
             scope.chartId = attributes.id;
             
             var chartConfig = {
-                type: 'line',
+                type: 'pie',
                 data: scope.chartData,
                 options:  { 
                     maintainAspectRatio: false, 
