@@ -5,6 +5,7 @@ AedestatsLocales.locale_enus = (function() {
     var exports = {
         
         POPULATION: "Population",
+        CITY: "City",
         ZONE: "Zone",
         REGION: "Region",
         NEIGHBORHOOD: "Neighborhood",
@@ -17,10 +18,11 @@ AedestatsLocales.locale_enus = (function() {
         VIRUS : "Virus",
         
         SELECT_ONE: "Select one option",
+        PROPORTION: "Proportion",
         
         getLocale: getLocale
         
-    }
+    };
     
     function getLocale() {
         return "en_us";    
