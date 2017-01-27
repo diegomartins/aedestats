@@ -24,7 +24,10 @@
         
         function defineMockedReturns($httpBackend) {
             
-            var areas = [{id: 1, name: "Catete"}, {id: 2, name: "Flamengo"}];
+            var areas = [{id: 1, name: "Área Programática 5", type : "region"},
+                         {id: 2, name: "Zona Sul", type : "zone"},
+                         {id: 10, name: "Catete", type : "nbh"}, 
+                         {id: 20, name: "Flamengo", type : "nbh"}];
             
             var globalStats = {
                 town: "Rio de Janeiro",
@@ -112,13 +115,11 @@
             
             $httpBackend.whenPOST('/rest/stats').respond(function(method, url, data, headers) {
                 
-                var dataObject = angular.fromJson(data);
+                var filter = angular.fromJson(data);
                 
                 var returnedStats = stats.filter(function(stat) {
-                    
-                    if(stat.id === dataObject.id) {
-                        return stat;
-                    }    
+                    //TODO: Implement filter
+                    return stat;
                 });
                 
                 return [200, returnedStats[0], {/*headers*/}];
