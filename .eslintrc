@@ -2,6 +2,8 @@
     "globals": {
         "angular": true,
         "document": true,
-        "AedestatsLocales" : true
+        "AedestatsLocales" : true,
+        "AedestatsUtils" : true,
+        "Chart" : true
     }
 }

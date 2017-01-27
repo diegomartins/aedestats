@@ -9,8 +9,7 @@
         
         var module = {
             getAreas       : getAreas,
-            getStats       : getStats,
-            getGlobalStats : getGlobalStats
+            getStats       : getStats
         };
         
         var appRoot = "/rest"
@@ -20,16 +19,12 @@
             return $http.get(appRoot + "/areas");
         }
         
-        function getStats(area) {
+        function getStats(filter) {
             
-            return $http.post(appRoot + "/stats", area);
+            return $http.post(appRoot + "/stats", filter);
         }
         
-        function getGlobalStats(area) {
-            
-            return $http.get(appRoot + "/globalstats");
-        }
-        
+
         return module;
     }
     

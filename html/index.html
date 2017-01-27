@@ -7,14 +7,90 @@
     </head>
     <body data-ng-app="AedestatsApp" data-ng-cloak>
         
-        <div id="global" data-ng-controller="AedestatsGlobalStatsController as agsCtrl">
+        <div id="filters" data-ng-controller="AedestatsDataController as adCtrl">
+            
+            <label for="city" class="lbl">{{messages["CITY"]}}</label>
+            
+            <select name="city" data-ng-model="adCtrl.filter.city" data-ng-change="adCtrl.getStats()"
+                data-ng-options="city as city.name for city in adCtrl.cities" disabled>
+            </select>   
+            
+            <label for="zone" class="lbl">{{messages["ZONE"]}}</label>
+            
+            <select name="zone" data-ng-model="vm.filter.zone" data-ng-change="adCtrl.getStats()"
+                data-ng-options="zone as zone.name for zone in adCtrl.zones">
+                <option value="">{{messages["SELECT_ONE"]}}</option>
+            </select>   
+            
+            <label for="region" class="lbl">{{messages["REGION"]}}</label>
+            
+            <select name="region" data-ng-model="vm.filter.region" data-ng-change="adCtrl.getStats()"
+                data-ng-options="region as region.name for region in adCtrl.regions">
+                <option value="">{{messages["SELECT_ONE"]}}</option>
+            </select>   
+            
+            <label for="nbh" class="lbl">{{messages["NEIGHBORHOOD"]}}</label>
+            
+            <select name="nbh" data-ng-model="vm.selectedNeighborhood" data-ng-change="adCtrl.getStats()"
+                data-ng-options="neighborhood as neighborhood.name for neighborhood in adCtrl.neighborhoods">
+                <option value="">{{messages["SELECT_ONE"]}}</option>
+            </select>   
+            
+        </div>
+        
+        <div id="stats" data-ng-controller="AedestatsStatsController as agsCtrl">
             
             <div class="data">
-                <span class="lbl">{{messages["POPULATION"]}}</span>
-                <span class="val">{{agsCtrl.stats.population}}</span>
                 
-                <span class="lbl">{{messages["CASES"]}}</span>
-                <span class="val">{{agsCtrl.stats.totalCases}}</span>
+                <div class="segment">
+                    <span class="lbl">{{messages["POPULATION"]}}</span>
+                    <span class="val">{{agsCtrl.stats.population}}</span>
+                </div>
+                
+                <div class="segment">
+                    <span class="lbl">{{messages["CASES"]}}</span>
+                    <span class="val">{{agsCtrl.stats.totalCases}}</span>
+                    
+                    <ul>
+                        <li>
+                             <span class="lbl">{{messages["DNG"]}}</span>
+                             <span class="val">{{agsCtrl.stats.dng.total}}</span>
+                        </li>
+                         
+                        <li>
+                             <span class="lbl">{{messages["CHK"]}}</span>
+                             <span class="val">{{agsCtrl.stats.chk.total}}</span>
+                        </li>
+                        
+                        <li>
+                             <span class="lbl">{{messages["ZIK"]}}</span>
+                             <span class="val">{{agsCtrl.stats.zik.total}}</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="segment">
+                    <span class="lbl">{{messages["INF_RATE"]}}</span>
+                    <span class="val">{{agsCtrl.stats.totalCases}}</span>
+                    <ul>
+                        <li>
+                             <span class="lbl">{{messages["DNG"]}}</span>
+                             <span class="val">{{agsCtrl.stats.dng.infRate}}</span>
+                        </li>
+                         
+                        <li>
+                             <span class="lbl">{{messages["CHK"]}}</span>
+                             <span class="val">{{agsCtrl.stats.chk.infRate}}</span>
+                        </li>
+                        
+                        <li>
+                             <span class="lbl">{{messages["ZIK"]}}</span>
+                             <span class="val">{{agsCtrl.stats.zik.infRate}}</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                
             </div>                    
             
             <table class="weekStats">
@@ -46,81 +122,15 @@
                 </tbody>
                 
             </table>
-            
-            <line-chart id="weekChart" chart-data="agsCtrl.chartData" width="1000" height="200"></line-chart>
-            
+
+          
         </div>
         
-        <div id="details" data-ng-controller="AedestatsDetailController as vm">
+        <div id="chartsArea" data-ng-controller="AedestatsChartsController as acCtrl">
+              
+            <line-chart id="weekChart" chart-data="acCtrl.charts.line.data" width="1000" height="200"></line-chart>
+            <pie-chart id="totalChart" chart-data="acCtrl.charts.pie.data" value-label="{{messages['CASES']}}" percentage-label="{{messages['PROPORTION']}}" width="240" height="240"></pie-chart>  
             
-            <label for="nbh" class="lbl">{{messages["NEIGHBORHOOD"]}}</label>
-            <select name="nbh" data-ng-model="vm.selectedNeighborhood" data-ng-change="vm.getStats()"
-                data-ng-options="neighborhood as neighborhood.name for neighborhood in vm.neighborhoods">
-                <option value="">{{messages["SELECT_ONE"]}}</option>
-            </select>
-            
-            <ul id="nbhData" data-ng-show="vm.selectedNeighborhood">
-            
-                <li>
-                    <span class="lbl">{{messages["ZONE"]}}</span>
-                    <span class="val">{{vm.selectedStats.zone.name}}</span>
-                </li>
-               
-                <li>
-                    <span class="lbl">{{messages["REGION"]}}</span>
-                    <span class="val">{{vm.selectedStats.region.name}}</span>
-                </li>
-                
-                <li>
-                    <span class="lbl">{{messages["POPULATION"]}}</span>
-                    <span class="val">{{vm.selectedStats.population}}</span>
-                </li>
-                
-                <li>
-                    <span class="lbl">{{messages["DNG"]}}</span>
-                    <span class="val">(dng)</span>
-                    <ul class="diseaseDetail">
-                        <li>
-                            <span class="lbl">{{messages["CASES"]}}</span>
-                            <span class="val">{{vm.selectedStats.dng.total}}</span>
-                        </li>
-                        <li>
-                            <span class="lbl">{{messages["INF_RATE"]}}</span>
-                            <span class="val">{{vm.selectedStats.dng.infRate}}</span>
-                        </li>
-                    </ul>
-                </li>
-                
-                <li>
-                    <span class="lbl">{{messages["ZIK"]}}</span>
-                    <span class="val">(zik)</span>
-                    <ul class="diseaseDetail">
-                        <li>
-                            <span class="lbl">{{messages["CASES"]}}</span>
-                            <span class="val">{{vm.selectedStats.zik.total}}</span>
-                        </li>
-                        <li>
-                            <span class="lbl">{{messages["INF_RATE"]}}</span>
-                            <span class="val">{{vm.selectedStats.zik.infRate}}</span>
-                        </li>
-                    </ul>
-                </li>
-                
-                <li>
-                    <span class="lbl">{{messages["CHK"]}}</span>
-                    <span class="val">(chk)</span>
-                    <ul class="diseaseDetail">
-                        <li>
-                            <span class="lbl">{{messages["CASES"]}}</span>
-                            <span class="val">{{vm.selectedStats.chk.total}}</span>
-                        </li>
-                        <li>
-                            <span class="lbl">{{messages["INF_RATE"]}}</span>
-                            <span class="val">{{vm.selectedStats.chk.infRate}}</span>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
         </div>
         
         <script type="text/javascript" src="../node_modules/chart.js/dist/Chart.js"></script>
@@ -131,6 +141,8 @@
         <script type="text/javascript" src="../js/angular/locale/locale_pt-br.js"></script>
         <script type="text/javascript" src="../js/angular/locale/locale_en-us.js"></script>
         
+        <script type="text/javascript" src="../js/util/AedestatsUtils.js"></script>
+                
         <script type="text/javascript" src="../js/angular/modules/LocaleApp.js"></script>
         <script type="text/javascript" src="../js/angular/modules/TaglibApp.js"></script>
         <script type="text/javascript" src="../js/angular/modules/ServicesApp.js"></script>
@@ -139,10 +151,13 @@
         <script type="text/javascript" src="../js/angular/httpBackendStub.js"></script>
         
         <script type="text/javascript" src="../js/angular/providers/LocaleProvider.js"></script>
+        <script type="text/javascript" src="../js/angular/services/EventsService.js"></script>
         <script type="text/javascript" src="../js/angular/services/AedestatsService.js"></script>
         
         <script type="text/javascript" src="../js/angular/directives/LineChart.js"></script>
-        <script type="text/javascript" src="../js/angular/controllers/AedestatsApp/AedestatsGlobalStatsController.js"></script>
-        <script type="text/javascript" src="../js/angular/controllers/AedestatsApp/AedestatsDetailController.js"></script>
+        <script type="text/javascript" src="../js/angular/directives/PieChart.js"></script>
+        <script type="text/javascript" src="../js/angular/controllers/AedestatsApp/AedestatsDataController.js"></script>
+        <script type="text/javascript" src="../js/angular/controllers/AedestatsApp/AedestatsStatsController.js"></script>
+        <script type="text/javascript" src="../js/angular/controllers/AedestatsApp/AedestatsChartsController.js"></script>
     </body>
 </html>

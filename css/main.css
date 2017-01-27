@@ -6,6 +6,32 @@ ul {
     list-style: none;
 }
 
+.data {
+    margin-top: 2%;
+    width: 100%;
+}
+
+.segment {
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 10%;
+    width: 23%;
+}
+
+
+.segment ul {
+    font-size: 12px;
+    padding: 0;
+}
+
+.segment ul .lbl {
+    /*float: left;*/
+}
+
+.segment ul .val {
+    /*float: right;*/
+}
+
 .weekStats {
     border-collapse: collapse;
 }
@@ -22,6 +48,37 @@ ul {
     text-align: center;
     padding-left: 3px;
     padding-right: 3px;
+}
+
+.pieChart .canvas {
+    float: left;    
+}
+
+.pieChart .details {
+    float : left;
+    margin : 0% 5% 0% 5%;
+}
+
+.pieChart .detailData p {
+    margin-left: 10px;
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: 0em;
+}
+
+.pieChart .detailData .lbl {
+    float: left;
+}
+
+.pieChart .detailData .val {
+    float: right;
+}
+
+.pieChart .details {
+    min-width: 300px;
+}
+
+.pieChart .detail {
+    margin-bottom: 30px;
 }
 
 /*

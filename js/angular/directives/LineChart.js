@@ -1,4 +1,4 @@
-(function(angular, Chart) {
+(function(angular, Chart, AedestatsUtils) {
     
     angular.module("TaglibApp")
         .directive("lineChart", LineChart);
@@ -17,6 +17,14 @@
             },
             link: link
         }
+        
+        const defaultDatasetConfiguration = {
+            fill: false,
+            lineTension: 0.1,
+            pointBorderWidth: 1,
+            pointRadius: 2,
+            spanGaps: false
+        };
         
         return directive;
         
@@ -52,12 +60,24 @@
                 }
                 
                 chartConfig.data = newData;
+                
+                addDefaultOptionsToDatasets(chartConfig.data.datasets);
+               
                 var chart = new Chart(ctx, chartConfig);
             });
             
             
             
         }
+        
+        function addDefaultOptionsToDatasets(datasets) {
+            
+            for(var i = 0; i < datasets.length; i ++) {
+                AedestatsUtils.extendObject(datasets[i], defaultDatasetConfiguration);
+            }    
+        }
+        
+       
     }
     
-})(angular, Chart);
+})(angular, Chart, AedestatsUtils);
