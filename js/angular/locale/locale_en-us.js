@@ -4,7 +4,10 @@ AedestatsLocales.locale_enus = (function() {
     
     var exports = {
         
+        AEDESTATS: "Aedestats",
+        AEDESTATS_DESCRIPTION: "Statistics on diseases caused by Aedes aegypti",
         POPULATION: "Population",
+        AREA: "Area",
         CITY: "City",
         ZONE: "Zone",
         REGION: "Region",

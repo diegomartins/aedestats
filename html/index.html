@@ -1,46 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html data-ng-app="AedestatsApp" data-ng-cloak
     
     <head>
         <meta charset="UTF-8">
         <link rel="stylesheet" href="../css/main.css">
+        <h1>{{messages["AEDESTATS"]}}</h1>
+        <h5>{{messages["AEDESTATS_DESCRIPTION"]}}</h5>
+        <hr/>
     </head>
-    <body data-ng-app="AedestatsApp" data-ng-cloak>
+    <body>
         
         <div id="filters" data-ng-controller="AedestatsDataController as adCtrl">
             
-            <label for="city" class="lbl">{{messages["CITY"]}}</label>
-            
-            <select name="city" data-ng-model="adCtrl.filter.city" data-ng-change="adCtrl.getStats()"
-                data-ng-options="city as city.name for city in adCtrl.cities" disabled>
-            </select>   
-            
-            <label for="zone" class="lbl">{{messages["ZONE"]}}</label>
-            
-            <select name="zone" data-ng-model="vm.filter.zone" data-ng-change="adCtrl.getStats()"
-                data-ng-options="zone as zone.name for zone in adCtrl.zones">
-                <option value="">{{messages["SELECT_ONE"]}}</option>
-            </select>   
-            
-            <label for="region" class="lbl">{{messages["REGION"]}}</label>
-            
-            <select name="region" data-ng-model="vm.filter.region" data-ng-change="adCtrl.getStats()"
-                data-ng-options="region as region.name for region in adCtrl.regions">
-                <option value="">{{messages["SELECT_ONE"]}}</option>
-            </select>   
-            
-            <label for="nbh" class="lbl">{{messages["NEIGHBORHOOD"]}}</label>
-            
-            <select name="nbh" data-ng-model="vm.selectedNeighborhood" data-ng-change="adCtrl.getStats()"
-                data-ng-options="neighborhood as neighborhood.name for neighborhood in adCtrl.neighborhoods">
-                <option value="">{{messages["SELECT_ONE"]}}</option>
-            </select>   
-            
+            <label for="city" class="lbl">{{messages["AREA"]}}</label>
+            <multilevel-select item-label="name" items="adCtrl.areas" data-ng-model="adCtrl.filter.area" on-change="adCtrl.updateStats" hierarchy-attribute="type" hierarchy="city, region, zone, nbh"></multilevel-select>
+
         </div>
         
         <div id="stats" data-ng-controller="AedestatsStatsController as agsCtrl">
             
-            <div class="data">
+            <div class="data" data-ng-show="agsCtrl.stats">
                 
                 <div class="segment">
                     <span class="lbl">{{messages["POPULATION"]}}</span>
@@ -71,7 +50,7 @@
                 
                 <div class="segment">
                     <span class="lbl">{{messages["INF_RATE"]}}</span>
-                    <span class="val">{{agsCtrl.stats.totalCases}}</span>
+                    <span class="val">{{agsCtrl.stats.infRate}}</span>
                     <ul>
                         <li>
                              <span class="lbl">{{messages["DNG"]}}</span>
@@ -93,7 +72,7 @@
                 
             </div>                    
             
-            <table class="weekStats">
+            <table class="weekStats" data-ng-show="agsCtrl.stats">
                 
                 <thead>
                      <tr>
@@ -126,12 +105,14 @@
           
         </div>
         
+        
         <div id="chartsArea" data-ng-controller="AedestatsChartsController as acCtrl">
               
             <line-chart id="weekChart" chart-data="acCtrl.charts.line.data" width="1000" height="200"></line-chart>
             <pie-chart id="totalChart" chart-data="acCtrl.charts.pie.data" value-label="{{messages['CASES']}}" percentage-label="{{messages['PROPORTION']}}" width="240" height="240"></pie-chart>  
             
         </div>
+      
         
         <script type="text/javascript" src="../node_modules/chart.js/dist/Chart.js"></script>
                 
@@ -156,6 +137,7 @@
         
         <script type="text/javascript" src="../js/angular/directives/LineChart.js"></script>
         <script type="text/javascript" src="../js/angular/directives/PieChart.js"></script>
+        <script type="text/javascript" src="../js/angular/directives/MultilevelSelect.js"></script>
         <script type="text/javascript" src="../js/angular/controllers/AedestatsApp/AedestatsDataController.js"></script>
         <script type="text/javascript" src="../js/angular/controllers/AedestatsApp/AedestatsStatsController.js"></script>
         <script type="text/javascript" src="../js/angular/controllers/AedestatsApp/AedestatsChartsController.js"></script>

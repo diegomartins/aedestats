@@ -11,27 +11,23 @@
     function AedestatsDataController($scope, AedestatsService, EventsService) {
         
         var vm = this;
-        
-        vm.cities        = [{name: "Rio de Janeiro"}];
-        vm.zones         = [];
-        vm.regions       = [];
-        vm.neighborhoods = [];
+
+        vm.areas         = [];
         
         vm.stats         = undefined;
         
         vm.filter = {
           
-            city         : vm.cities[0],
-            zone         : undefined,
-            region       : undefined,
-            neighborhood : undefined,
+            area         : undefined,
             year         : undefined
             
         };
         
-        initializeAreas();
-        updateStats();
+        vm.updateStats = updateStats;
         
+        
+        initializeAreas();
+
         
         function updateStats() {
         
@@ -43,7 +39,7 @@
                 EventsService.fireDataLoaded($scope.$parent, vm.stats);
             }, function(response) {
                 //TODO: Handle error.
-                console.error("Error getting global stats.");
+                console.error("Error getting stats.");
             });    
         }
         
@@ -57,10 +53,12 @@
                 
                 for(var i = 0; i < areas.length; i ++) {
                     
-                    if(areas[i].type === 'nbh')     vm.neighborhoods.push(areas[i]);
-                    if(areas[i].type === 'region')  vm.regions.push(areas[i]);
-                    if(areas[i].type === 'zone')    vm.zones.push(areas[i]);
+                    vm.areas.push(areas[i]);
+
                 }
+                
+                vm.filter.area = vm.areas[0];
+                vm.updateStats();
                 
             }, function(response) {
                 //TODO: Handle error.

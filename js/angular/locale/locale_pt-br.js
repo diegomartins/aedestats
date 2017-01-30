@@ -4,7 +4,10 @@ AedestatsLocales.locale_ptbr = (function() {
     
     var exports = {
         
+        AEDESTATS: "Aedestats",
+        AEDESTATS_DESCRIPTION: "Estatísticas de disseminação de doenças causadas pelo Aedes aegypti",
         POPULATION: "População",
+        AREA: "Área",
         CITY: "Cidade",
         ZONE: "Zona",
         REGION: "Região",
