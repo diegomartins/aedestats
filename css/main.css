@@ -1,3 +1,31 @@
+.multilevelSelect {
+    width: 210px;
+    height: 30px;
+    font-size: 20px;
+}
+
+.multilevelSelect_level0 {
+    font-size: 17px;
+    font-weight: bolder;
+}
+
+.multilevelSelect_level1 {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.multilevelSelect_level2 {
+    font-size: 13px;
+}
+
+.multilevelSelect_level3 {
+    font-size: 12px;
+}
+
+#chartsArea {
+    margin-top: 20px;    
+}
+
 .lbl::after {
     content: ":"; 
 }
